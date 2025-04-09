@@ -1,0 +1,76 @@
+{
+  "info": {
+    "_postman_id": "394aca7c-f38a-4d4c-9d32-afe5e7ecabc7",
+    "name": "TaskAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43946952"
+  },
+  "item": [
+    {
+      "name": "Get tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["tasks"],
+          "query": [
+            {
+              "key": "user_id",
+              "value": "3cfb30fb-fba2-41cc-aed6-482c3052e0cc",
+              "disabled": true
+            },
+            {
+              "key": "status",
+              "value": "new",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create task",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Test Task\",\n    \"starts_at\": \"2025-04-01T10:00:00.000Z\",\n    \"ends_at\": \"2025-04-01T11:00:00.000Z\",\n    \"user_id\": \"3cfb30fb-fba2-41cc-aed6-482c3052e0cc\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["tasks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Set as completed",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/tasks/{taskID}/complete",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["tasks", "{taskID}", "complete"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+services:
+  test:
+    build:
+      context: .
+      target: builder
+    environment:
+      - NODE_ENV=test
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run test:all
