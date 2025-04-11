@@ -1,5 +1,5 @@
+import { createTask } from '../domain';
 import { InMemoryTaskRepository } from '../repositories';
-import { Task } from '../types';
 
 describe('InMemoryTaskRepository', () => {
   let repository: InMemoryTaskRepository;
@@ -13,15 +13,12 @@ describe('InMemoryTaskRepository', () => {
   });
 
   describe('findOverlappingTasks', () => {
-    const task: Task = {
-      id: '1',
-      name: 'Task 1',
-      starts_at: new Date('2025-01-01 10:00:00').toISOString(),
-      ends_at: new Date('2025-01-01 12:00:00').toISOString(),
-      user_id: '1',
-      status: 'new',
-      created_at: new Date('2025-01-01 10:00:00').toISOString(),
-    } as const;
+    const task = createTask(
+      'Task 1',
+      '1',
+      new Date('2025-01-01 10:00:00').toISOString(),
+      new Date('2025-01-01 12:00:00').toISOString()
+    );
 
     beforeEach(() => {
       repository.save(task);

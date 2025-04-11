@@ -1,7 +1,7 @@
 import { IsIn, IsOptional, IsString, IsUUID } from 'class-validator';
 
 import { Timestamp, UUID } from 'src/common/types';
-import { TaskStatus, TaskStatusValues } from '../types/task';
+import { TaskStatus, TaskStatusValues } from '../domain/types/task';
 
 export class FindAllTasksDto {
   @IsOptional()

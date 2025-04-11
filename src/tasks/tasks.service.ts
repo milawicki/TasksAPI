@@ -1,10 +1,9 @@
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { randomUUID } from 'crypto';
 
 import { UUID } from 'src/common/types';
 
 import { CreateTaskDto, FindAllTasksDto } from './dto';
-import { Task } from './types';
+import { Task, createTask } from './domain';
 import { TASK_REPOSITORY, TaskRepository } from './repositories';
 
 @Injectable()
@@ -25,16 +24,7 @@ export class TasksService {
       throw new BadRequestException('User already has a task in this time period');
     }
 
-    const task: Task = {
-      id: randomUUID(),
-      name: data.name,
-      status: 'new',
-      user_id: data.user_id,
-      starts_at: data.starts_at,
-      ends_at: data.ends_at,
-      created_at: new Date().toISOString(),
-    };
-
+    const task = createTask(data.name, data.user_id, data.starts_at, data.ends_at);
     return this.taskRepository.save(task);
   }
 
@@ -49,12 +39,11 @@ export class TasksService {
       throw new NotFoundException('Task not found');
     }
 
-    if (task.status === 'completed') {
-      throw new BadRequestException('Task already completed');
+    try {
+      const completedTask = task.setAsCompleted();
+      return this.taskRepository.save(completedTask);
+    } catch (error) {
+      throw new BadRequestException(error.message);
     }
-
-    task.status = 'completed';
-
-    return this.taskRepository.save(task);
   }
 }

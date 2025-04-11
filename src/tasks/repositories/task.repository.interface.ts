@@ -1,7 +1,7 @@
 import { Nullable, Timestamp, UUID } from 'src/common/types';
 
 import { FindAllTasksDto } from '../dto';
-import { Task } from '../types';
+import { Task } from '../domain';
 
 export const TASK_REPOSITORY = 'TASK_REPOSITORY';
 

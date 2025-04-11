@@ -4,26 +4,23 @@ import { Nullable, Timestamp, UUID } from 'src/common/types';
 
 import { FindAllTasksDto } from '../dto';
 import { TaskRepository } from '.';
-import { Task } from '../types';
+import { Task } from '../domain';
 
 @Injectable()
 export class InMemoryTaskRepository implements TaskRepository {
-  private tasks: Task[] = [];
+  private tasks: Map<UUID, Task> = new Map();
+
+  private getTasks(): Task[] {
+    return [...this.tasks.values()];
+  }
 
   save(task: Task): Task {
-    const existingTaskIndex = this.tasks.findIndex((t) => t.id === task.id);
-
-    if (existingTaskIndex >= 0) {
-      this.tasks[existingTaskIndex] = task;
-    } else {
-      this.tasks.push(task);
-    }
-
+    this.tasks.set(task.id, task);
     return task;
   }
 
   findAll(filters?: FindAllTasksDto): Task[] {
-    let filteredTasks = [...this.tasks];
+    let filteredTasks = this.getTasks();
 
     if (filters?.status) {
       filteredTasks = filteredTasks.filter((task) => task.status === filters.status);
@@ -41,13 +38,10 @@ export class InMemoryTaskRepository implements TaskRepository {
   }
 
   findById(id: UUID): Nullable<Task> {
-    const task = this.tasks.find((t) => t.id === id);
-    return task || null;
+    return this.tasks.get(id) || null;
   }
 
   findOverlappingTasks(userId: UUID, startsAt: Timestamp, endsAt: Timestamp): Task[] {
-    return this.tasks.filter(
-      (task) => task.user_id === userId && task.starts_at <= endsAt && task.ends_at >= startsAt
-    );
+    return this.getTasks().filter((task) => task.isOverlappingWith(userId, startsAt, endsAt));
   }
 }

@@ -25,7 +25,7 @@ describe('TasksService', () => {
       const task: CreateTaskDto = {
         name: 'Test Task',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '3cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       };
 
@@ -40,7 +40,7 @@ describe('TasksService', () => {
       const task: CreateTaskDto = {
         name: 'Test Task',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '3cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       };
       service.create(task);
@@ -54,19 +54,19 @@ describe('TasksService', () => {
       {
         name: 'Test Task 1',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '3cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       },
       {
         name: 'Test Task 2',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '4cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       },
       {
         name: 'Test Task 3',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '5cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       },
     ];
@@ -130,7 +130,7 @@ describe('TasksService', () => {
       const task: CreateTaskDto = {
         name: 'Test Task',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '3cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       };
       const createdTask = service.create(task);
@@ -147,7 +147,7 @@ describe('TasksService', () => {
       const task: CreateTaskDto = {
         name: 'Test Task',
         starts_at: new Date().toISOString(),
-        ends_at: new Date().toISOString(),
+        ends_at: new Date(new Date().getTime() + 1000 * 60 * 60 * 2).toISOString(),
         user_id: '3cfb30fb-fba2-41cc-aed6-482c3052e0cc',
       };
       const createdTask = service.create(task);
