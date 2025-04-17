@@ -18,7 +18,7 @@ export class GlobalRateLimitGuard implements CanActivate {
     private configService: ConfigService
   ) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
+  canActivate(): boolean {
     const ratePeriod = this.configService.get<string>('CREATE_TASK_GLOBAL_RATE_PERIOD');
     const tasksLimit = this.configService.get<string>('CREATE_TASK_GLOBAL_RATE_LIMIT');
 
